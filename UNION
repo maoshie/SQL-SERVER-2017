@@ -1,0 +1,32 @@
+/*
+
+
+*/
+
+Sintaxe:
+SELECT colunas FROM tabela01
+UNION
+SELECT colunas FROM tabela02
+
+-- Como juntar selects (Union All);
+-- Permite combinar duas ou mais declarações SELECT;
+-- Deve ter o mesmo numero de colunas, tipos de dados e ordem das colunas;
+
+SELECT tbl_Clientes.nmCliente, tbl_Produtos.nmProduto, SUM(qtProdutos) AS qtProdutos, tbl_Produtos.vlProduto,
+	   tbl_Produtos.vlProduto * tbl_ProdutoVendas.qtProdutos AS Total
+FROM tbl_Produtos 
+	INNER JOIN tbl_ProdutoVendas ON tbl_Produtos.cdProduto = tbl_ProdutoVendas.cdProduto
+	INNER JOIN tbl_Vendas ON tbl_ProdutoVendas.cdVenda = tbl_Vendas.cdVenda
+	INNER JOIN tbl_Clientes ON tbl_Clientes.cdCliente = tbl_Vendas.cdCliente
+GROUP BY tbl_Clientes.nmCliente, tbl_Produtos.nmProduto, tbl_Produtos.vlProduto, tbl_ProdutoVendas.qtProdutos
+
+UNION 
+
+SELECT tbl_Clientes.nmCliente, tbl_Produtos.nmProduto, tbl_Clientes.cdCliente, SUM(tbl_ProdutoVendas.qtProdutos) AS TotalProdutos, SUM(tbl_Produtos.vlProduto * tbl_ProdutoVendas.qtProdutos) AS TotalVendas
+	   --tbl_Produtos.vlProduto * tbl_ProdutoVendas.qtProdutos AS Total
+FROM tbl_Produtos 
+	INNER JOIN tbl_ProdutoVendas ON tbl_Produtos.cdProduto = tbl_ProdutoVendas.cdProduto
+	INNER JOIN tbl_Vendas ON tbl_ProdutoVendas.cdVenda = tbl_Vendas.cdVenda
+	INNER JOIN tbl_Clientes ON tbl_Clientes.cdCliente = tbl_Vendas.cdCliente
+--WHERE nmCliente = 'Marcio Oshie'
+GROUP BY tbl_Clientes.nmCliente, tbl_Clientes.cdCliente, tbl_Produtos.nmProduto
