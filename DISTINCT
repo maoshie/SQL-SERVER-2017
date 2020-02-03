@@ -1,0 +1,13 @@
+/*
+
+*/
+
+-- DISTINCT - Consultas com valores distintos, sem repetição;
+
+-- SELECT DISTINCT => Exibir apenas valores distintos;
+
+Sintaxe:
+-- SELECT DISTINCT colunas FROM tabela
+
+SELECT DISTINCT ID_Autor FROM tbl_Livros -- Não repete!!
+SELECT ID_Autor FROM tbl_Livros
