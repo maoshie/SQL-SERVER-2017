@@ -1,0 +1,12 @@
+/*
+Utilizando DELETE para deletar um Registro;
+
+*/
+
+Sintaxe:
+DELETE FROM nome_tabela
+WHERE condição
+
+-- DELETAR UM REGISTRO!!
+DELETE FROM tbl_Editoras
+WHERE ID_Editora = 8
