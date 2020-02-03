@@ -1,0 +1,18 @@
+/*
+  LIKE e NOT LIKE - Filtrar por padrões específicos;
+*/
+
+- LIKE
+Determina em uma busca um padrão de caracteres;
+WHERE coluna LIKE padrão
+
+- NOT LIKE
+Determina em uma busca um valor padrão que NÃO CORRESPONDE;
+WHERE coluna NOT LIKE padrão
+
+
+SELECT n_Livro FROM tbl_Livros
+WHERE n_Livro LIKE '[PC]%'
+
+SELECT Nome_Editora FROM tbl_Editoras
+WHERE Nome_Editora LIKE '[B_P]%'
