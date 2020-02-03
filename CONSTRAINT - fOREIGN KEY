@@ -1,0 +1,17 @@
+-- Adicionar uma CONSTRAINT na tabela Vendas.
+ALTER TABLE tbl_Vendas -- Altera chave da tabela;
+ADD CONSTRAINT fk_Produto_Vendas -- add regra (nome_regra);
+FOREIGN KEY(cdProduto) -- adicionar FOREIGN KEY;
+REFERENCES tbl_Produtos(cdProduto) -- Referencia da tabela = tbl_Produtos = cdProdutos;
+
+-- Adicionando uma CONSTRAINT na tabela ENDEREÇOS
+ALTER TABLE tbl_Endereços
+ADD CONSTRAINT fk_Enderecos_Cidades
+FOREIGN KEY (cdCidade) 
+REFERENCES tbl_Cidades(cdCidade)
+
+-- Adicionando uma CONSTRAINT na tabela CIDADES
+ALTER TABLE tbl_Cidades
+ADD CONSTRAINT fk_Cidades_Estados
+FOREIGN KEY (cdEstado)
+REFERENCES tbl_Estados(cdEstado)
