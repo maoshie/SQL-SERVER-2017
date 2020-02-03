@@ -1,0 +1,15 @@
+
+/*
+  Concatenar strings utilizando o sinal de +
+*/
+
+Sintaxe:
+string1/coluna + string2/coluna2 
+
+
+SELECT 'Marcio' + 'Oshie' AS Nome
+
+SELECT Nome_Autor + ' ' + Sobrenome_Autor AS 'Nome Completo' FROM tbl_Autores 
+
+SELECT 'Meu livro Preferido é ' + n_Livro AS Meu_Livro FROM tbl_Livros
+WHERE ID_Livro = 14 
