@@ -1,0 +1,15 @@
+/*
+  Collation - Agrupamento de Caracteres ou Colação;
+  Trata-se da codificação dos caracteres em ordem padrão;
+  Baseado em ordem Numérica ou alfabética;
+  collation ("colação"/"Agrupamento")
+*/
+
+-- Ver as opções de agrupamento;
+SELECT * FROM fn_helpcollations()
+
+-- Para ver o esquema de colação usado atualmente;
+SELECT SERVERPROPERTY('Collation')
+
+-- Para ver o esquema de colação de algum database;
+SELECT DATABASEPROPERTYEX ('db_Biblioteca','Collation' ) 
