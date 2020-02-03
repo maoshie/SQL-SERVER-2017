@@ -1,0 +1,25 @@
+/*
+
+
+*/
+
+-- Comando IF;
+
+DECLARE @desconto SMALLINT;
+SET @desconto = 1 -- 1 = desconto/ 2 = SEM desconto;
+
+IF @desconto = 1
+--BEGIN
+	SELECT cdProduto, nmProduto, vlProduto,
+	CASE
+		WHEN vlProduto <= 5 THEN vlProduto *1.2
+		WHEN vlProduto > 6.0 THEN vlProduto * 0.8 
+		ELSE vlProduto
+	END AS Preco_Desconto
+	FROM tbl_Produtos ORDER BY vlProduto
+--END
+ELSE
+	SELECT cdProduto, nmProduto, vlProduto
+	FROM tbl_Produtos ORDER BY vlProduto
+
+-- Mais de 1 comando dentro do IF deve ser usar BEGIN/END;
