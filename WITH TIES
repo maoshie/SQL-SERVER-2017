@@ -1,0 +1,9 @@
+/*
+  WITH TIES
+  Retorna resultado com mesmo valor
+  utiliza com TOP() e ORDER BY
+*/
+
+
+SELECT TOP(7) WITH TIES n_Livro, ID_Autor FROM tbl_Livros
+ORDER BY ID_Autor 
