@@ -1,0 +1,17 @@
+/*
+  MIN = Valor Minimo
+  MAX = Valor Maximo
+  AVG = Media Aritmética
+  SUM = Total(SOMA)
+  COUNT = Contar quantidades de itens
+*/
+
+SELECT COUNT(*) FROM tbl_Livros
+SELECT COUNT(Nome_Autor) FROM tbl_Autores
+
+SELECT MIN(Preco_Livro) AS Preco_Minimo FROM tbl_Livros
+SELECT MAX(Preco_Livro) AS Preco_Maximo FROM tbl_Livros
+
+SELECT AVG(Preco_Livro) AS Preco_Medio FROM tbl_Livros
+
+SELECT SUM(Preco_Livro) AS Preco_Total FROM tbl_Livros
