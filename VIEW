@@ -1,0 +1,31 @@
+/*
+  VIEWS (Exibições) - Criar, Alterar e Excluir
+  Uma exibição de conjunto de resultados
+  Contem linhas e colunas;
+  Mostra sempre o resultado atualizado; 
+*/
+
+Sintaxe:
+CREATE VIEW [nome_exibição] 
+AS SELECT colunas
+FROM TABELA
+WHERE condições
+
+
+-- Criar VIEW da tabela Livros;
+-- VIEW com busca do Preço_livro > 25.00;
+CREATE VIEW vw_LivrosAtual
+AS SELECT tbl_Livros.n_Livro, tbl_Livros.Data_Pub, tbl_Livros.Preco_Livro,
+		      tbl_Autores.Nome_Autor, tbl_Autores.Sobrenome_Autor
+FROM tbl_Livros INNER JOIN tbl_Autores 
+ON tbl_Autores.ID_Autor = tbl_Livros.ID_Autor 
+WHERE Preco_Livro > 25.00
+
+
+-- VIEW com busca Geral;
+CREATE VIEW vw_LivrosAtual
+AS SELECT tbl_Livros.n_Livro AS Livro, tbl_Livros.Data_Pub AS Publicação, tbl_Livros.Preco_Livro AS Preço,
+		  tbl_Autores.Nome_Autor AS Nome, tbl_Autores.Sobrenome_Autor AS Sobrenome
+FROM tbl_Livros INNER JOIN tbl_Autores
+ON tbl_Autores.ID_Autor = tbl_Livros.ID_Autor
+
