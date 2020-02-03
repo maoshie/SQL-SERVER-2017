@@ -1,11 +1,15 @@
 /*
-
-
+  Variáveis - Declaração e atribuição de valores;
+  Podem ser declaradas no Batch ou PROCEDURE;
+  Atribui valores usando SET ou SELECT;
+  As variaveis são iniciadas com NULL como padrão;
+  Usa-se DECLARE apenas uma vez para todas as variaveis que declarar;
 */
 
 
 Sintaxe:
 DECLARE @nome_Variavel;
+DECLARE @nome_variavel TIPO(INT, VARCHAR)
 
 DECLARE @MaiorPreco DECIMAL(6,2);
 SET @MaiorPreco = (SELECT MAX(vlProduto) FROM tbl_Produtos)
@@ -18,3 +22,36 @@ SELECT * FROM tbl_Produtos ORDER BY vlProduto desc
 DECLARE @nome_Variavel VARCHAR(10);
 SET @nome_Variavel = 'Marcio'
 PRINT @nome_Variavel
+
+-- Declarando VARIAVEL;
+DECLARE @VALOR, PRECO INT, > Declarar mais de uma;
+		@TESTO VARCHAR(40),
+		@DATA_NASC DATE,
+		@NADA MONEY
+ 
+ 
+-- Declarando VARIAVEL e Inserindo dados na VARIAVEL; 
+DECLARE @VALOR INT,
+		@TEXTO VARCHAR(40), 
+		@DATA_NASC DATE,
+		@NADA DECIMAL(6,0)
+SET @VALOR = 50
+SET @TEXTO = 'Marcio'
+SET @DATA_NASC = GETDATE()
+SET @NADA = '7800'
+SELECT @VALOR AS Valor, 
+	   @TEXTO AS Nome,
+	   @DATA_NASC AS 'Data de Nascimento',
+	   @NADA AS 'Salario'
+
+
+-- exemplo de variaveis com calculos; 
+
+DECLARE @Preco MONEY,
+		@Quantidade INT,
+		@Nome VARCHAR(30)
+SET @Quantidade = 9
+
+SELECT @Preco = Preco_Livro, @Nome = n_Livro FROM tbl_Livros
+WHERE ID_Autor = 5
+SELECT @Nome AS 'Nome do Livro', @Preco * @Quantidade AS 'Preço do Livro'
