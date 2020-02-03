@@ -1,0 +1,58 @@
+/*
+
+  OUTER JOIN -- ( LEFT JOIN, RIGHT JOIN, FULL JOIN );
+  LEFT JOIN = retorna todas as linhas da tabela a esquerda; ESQUERDA
+  RIGHT JOIN = retorna todas as linhas da direita; DIREITA
+  FULL JOIN = Retorna linhas quando houver correspondecia em qualquer;
+
+*/
+
+------ LEFT JOIN --------
+
+Sintaxe:
+SELECT coluna
+FROM tabela_esq
+LEFT(OUTER) JOIN tabela_dir
+ON tabela_esq.coluna = tabela_dir.coluna
+
+-- MESMO QUE NÃO TENHA CORRESPONDENCIA ID_XXX = ID_XXX ELE RETORNA
+SELECT * FROM tbl_Livros
+LEFT JOIN tbl_Autores 
+ON tbl_Livros.ID_Autor = tbl_Autores.ID_Autor
+
+-- MESMO QUE NÃO TENHA CORRESPONDENCIA ID_XXX = ID_XXX ELE RETORNA
+SELECT * FROM tbl_Livros
+LEFT JOIN tbl_Autores 
+ON tbl_Livros.ID_Autor = tbl_Autores.ID_Autor
+WHERE tbl_Autores.ID_Autor IS NULL  -- retorna apenas o campo ID_Autor NULL -- 
+
+
+------ RIGHT JOIN --------
+
+SELECT * FROM tbl_Autores
+RIGHT JOIN tbl_Livros
+ON tbl_livros.ID_Autor = tbl_Autores.ID_Autor
+WHERE tbl_Autores.ID_Autor IS NULL  -- Retorna OS CAMPOS NULL P DIREITA;
+
+------ FULL OUTER JOIN --------
+
+/*
+  FULL OUTER JOIN - Selecionar dados de várias tabelas;
+  Retorna REGISTROS que não se correspondem;
+/*
+
+Sintaxe:
+SELECT colunas
+FROM tabela1
+FULL(OUTER)JOIN tabela2
+ON tabela1.coluna = tabela2.coluna
+
+-- Volta só os campos NULL; 
+-- FULL JOIN e LEFT JOIN voltam o mesmo resultado!!
+SELECT tbl_Livros.n_Livro, tbl_Livros.ID_Autor
+FROM tbl_Livros
+FULL JOIN tbl_Autores 
+ON tbl_Autores.ID_Autor = tbl_Livros.ID_Autor
+WHERE tbl_Livros.ID_Autor IS NULL OR tbl_Autores.ID_Autor IS NULL 
+
+
