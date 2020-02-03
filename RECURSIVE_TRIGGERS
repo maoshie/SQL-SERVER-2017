@@ -1,5 +1,8 @@
 /*
-
+  TRIGGER RECURSIVO;
+  Tipo especial de TRIGGER AFTER ANINHADO;
+  Ocorre quando um TRIGGER executa uma declaração DML e dispara outro TRIGGER;
+  Para Habilitar/Desabilitar:
 
 */
 
