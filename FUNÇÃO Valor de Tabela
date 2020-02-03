@@ -1,0 +1,43 @@
+/*
+
+
+
+*/
+
+-- Funções de Valor de Tabela;
+-- Criando uma função retornando dados completos;
+
+/*
+	Autor: Marcio Oshie
+	Data: 30/01/2020
+	Base: AdventureWorks2016CTP3
+	Função: Função de retorno dos dados completos;
+	caminho: SELECT * FROM AdventureWorks2016CTP3.dbo.UDF_DadosCompletos()
+*/
+
+CREATE FUNCTION UDF_DadosCompletos()
+RETURNS @Retorno TABLE(
+	NomeCompleto VARCHAR(70),
+	Idade INT,
+	Nascimento DATE,
+	Sexo VARCHAR(1),
+	TempoCasa INT,
+	Cargo VARCHAR(100)
+)
+AS
+BEGIN
+	INSERT INTO @Retorno
+	SELECT
+		P.FirstName + ' ' + ISNULL(p.MiddleName, ' ') + ' . ' + p.LastName  AS NomeCompleto,
+		DATEDIFF(YEAR, HE.BirthDate, GETDATE()) AS Idade,
+		HE.BirthDate AS Nascimento,
+		HE.Gender AS Sexo,
+		DATEDIFF(YEAR, HE.HireDate, GETDATE()) AS TempoCasa,
+		HE.JobTitle AS Cargo
+	FROM
+		Person.Person P INNER JOIN HumanResources.Employee HE
+		ON P.BusinessEntityID = HE.BusinessEntityID
+	RETURN
+END
+
+SELECT * FROM AdventureWorks2016CTP3.dbo.UDF_DadosCompletos()
