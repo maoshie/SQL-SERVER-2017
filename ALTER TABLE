@@ -1,10 +1,15 @@
 
 /*
+
 ALTER TABLE nomeTabela
 ADD
 DROP
 SET
+TRUNCATE
+
 */
+
+-- TRUNCATE TABLE = excluir todas as informações da tabela;
 
 -- Removendo uma coluna;
 ALTER TABLE tbl_Clientes
