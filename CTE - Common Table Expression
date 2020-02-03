@@ -1,0 +1,20 @@
+/*
+  CTE - Common Table Expression;
+  Começa com WITH
+*/
+
+Sintaxe:
+WITH nome_Consulta (coluna1, coluna2)
+
+-- 
+WITH ConsultaGastos (Cliente, Total_Gastos) 
+AS (SELECT CL.nmCliente AS Cliente, PR.Preco_Produto * CO.Quantidade AS Total_Gastos		
+FROM tb_Clientes AS CL
+INNER JOIN tb_Compras AS CO ON CO.ID_Cliente = CL.ID_Cliente
+INNER JOIN tb_Produtos AS PR ON PR.ID_Produto = CO.ID_Produto)
+
+--
+SELECT Cliente, SUM(Total_Gastos) AS Valor_Total
+FROM ConsultaGastos
+GROUP BY Cliente
+ORDER BY Valor_Total
