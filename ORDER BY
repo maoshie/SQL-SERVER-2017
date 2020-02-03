@@ -1,0 +1,12 @@
+/*
+
+*/
+
+-- ORDER BY - Consultas com ordenação de Colunas;
+
+- ORDER BY => palavra chave usado para ORDENAR o resultado da busca;
+- ASC => ascendente;
+- DESC => descendente(inversa);
+
+SELECT * FROM tbl_Livros ORDER BY Data_Pub DESC
+SELECT * FROM tbl_Livros ORDER BY ID_Livro
