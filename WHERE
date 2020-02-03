@@ -1,0 +1,13 @@
+/*
+
+*/
+
+-- WHERE - Filtrando registros em uma consulta
+
+- Filtrar registros em uma coluna;
+
+Sintaxe:
+SELECT coluna FROM tabela WHERE coluna = valor;
+
+SELECT * FROM tbl_Livros WHERE ID_Editora = '3'
+SELECT ID_Autor, Nome_Autor FROM tbl_Autores WHERE Sobrenome_Autor = 'Oshie'
