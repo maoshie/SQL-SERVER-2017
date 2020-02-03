@@ -1,0 +1,15 @@
+/*
+  CREATE INDEX;
+  Permite que as aplicações de banco de dados encontrem os dados mais rapido;
+*/
+
+Sintaxe:
+CREATE INDEX nome_indice
+ON nome_tabela (nome_coluna)
+
+
+SELECT * FROM tbl_Livros ORDER BY Preco_Livro
+SELECT * FROM Pesquisa_Livro
+
+CREATE INDEX Pesquisa_livro
+ON tbl_Livros(n_Livro)
