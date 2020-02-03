@@ -2,8 +2,7 @@
 
 CREATE DATABASE db_LojaJailson
 
-
-
+--------------------------------------------------------------------------------;
 CREATE TABLE tbl_Clientes (
 	cdCliente INT PRIMARY KEY IDENTITY(1,1),
 	nmCliente VARCHAR(50) NOT NULL,
@@ -14,34 +13,41 @@ CREATE TABLE tbl_Clientes (
 	nmEstado VARCHAR(30),
 	nmTelefone VARCHAR(15)
 );
-
 --------------------------------------------------------------------------------;
-
 CREATE TABLE tbl_Vendas (
 	cdVenda INT PRIMARY KEY IDENTITY(1,1),
 	cdCliente INT NOT NULL FOREIGN KEY REFERENCES tbl_Clientes(cdCliente),
 	dtVenda DATE NOT NULL
 );
-
--- Adicionar uma regra CONSTRAINT;
-ALTER TABLE tbl_Vendas -- Altera chave da tabela;
-ADD CONSTRAINT fk_Produto_Vendas -- add regra (nome_regra);
-FOREIGN KEY(cdProduto) -- adicionar FOREIGN KEY;
-REFERENCES tbl_Produtos(cdProduto) -- Referencia da tabela = tbl_Produtos = cdProdutos;
-
 --------------------------------------------------------------------------------;
-
 CREATE TABLE tbl_ProdutoVendas(
 	cdProdutoVenda INT PRIMARY KEY IDENTITY(1,1),
 	cdVenda INT FOREIGN KEY REFERENCES tbl_Vendas(cdVenda) NOT NULL,
 	cdProduto INT FOREIGN KEY REFERENCES tbl_Produtos(cdProduto) NOT NULL,
 	qtProdutos INT NOT NULL
 );
-
 --------------------------------------------------------------------------------;
-
 CREATE TABLE tbl_Produtos(
 	cdProduto INT PRIMARY KEY IDENTITY(1,1),
 	nmProduto VARCHAR(60) NOT NULL,
 	vlProduto DECIMAL(6,2)
+);
+--------------------------------------------------------------------------------;
+CREATE TABLE tbl_Endereços (
+	cdEndereco INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	nmEndereco VARCHAR(50) NOT NULL,
+	nmCEP VARCHAR(10),
+	cdCidade INT NOT NULL
+);
+--------------------------------------------------------------------------------;
+CREATE TABLE tbl_Cidades(
+	cdCidade INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	nmCidade VARCHAR(50) NOT NULL,
+	cdEstado INT NOT NULL
+);
+--------------------------------------------------------------------------------;
+CREATE TABLE tbl_Estados(
+	cdEstado INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	nmEstado VARCHAR(50),
+	nmSigla VARCHAR(3)
 );
