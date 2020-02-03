@@ -1,0 +1,36 @@
+/*
+  Stored Procedures - Alteração e Parâmetros de Entrada no SQL Server - parte 02
+  ALTER PROCEDURE;
+*/ 
+
+
+Sintaxe:
+ALTER PROCEDURE nome_procedure
+	bloco de codigo da sp
+
+--------------------------------------------------------------
+ALTER PROCEDURE teste(@par1 AS INT)
+AS 
+SELECT @par1
+
+EXEC teste 22 
+----------------------------------------------------------------
+SELECT * FROM tbl_Livros
+
+ALTER PROCEDURE P_LivroValor
+(@ID SMALLINT)
+AS
+SELECT n_Livro, Preco_Livro
+FROM tbl_Livros
+WHERE ID_Livro = @ID
+
+EXEC P_LivroValor 2
+----------------------------------------------------------------
+ALTER PROCEDURE teste
+(@par1 AS INT, @par2 AS VARCHAR(20))
+AS 
+SELECT @par1
+SELECT @par2
+
+--EXEC teste 26, 'Laranja' 
+EXEC teste @par1 = 25, @par2 = 'emprego'
