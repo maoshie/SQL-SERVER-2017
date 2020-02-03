@@ -1,0 +1,12 @@
+/*
+  Alias com AS - Nomes alternativos para colunas;
+  Pode se dar um nome diferente a uma coluna ou tabela em uma consulta;
+*/
+
+Sintaxe:
+SELECT colunas 
+AS nome_alias
+FROM tabela
+
+SELECT n_Livro AS Nome_Livro, ID_Autor AS Codigo_Autor
+FROM tbl_Livros
