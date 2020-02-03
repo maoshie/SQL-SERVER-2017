@@ -1,0 +1,8 @@
+/*
+Utilizado para Inserir dados na tabela que contem IDENTITY(x,x)
+
+*/
+
+Sintaxe:
+SET IDENTITY_INSERT #tmp_cidades ON; -- Habilita inserir dados;
+SET IDENTITY_INSERT #tmp_cidades OFF; -- Bloqueia o acesso para inserir os dados;
