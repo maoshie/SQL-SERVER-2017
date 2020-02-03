@@ -1,0 +1,40 @@
+/*
+
+
+*/
+
+-- Criando uma VIEW para retornar Endereço completo;
+CREATE VIEW vw_End_Completo
+AS
+SELECT tbl_Clientes.nmCliente, tbl_Endereços.nmEndereco, tbl_Cidades.nmCidade, tbl_Estados.nmEstado
+FROM tbl_Clientes 
+INNER JOIN tbl_Endereços ON tbl_Clientes.cdEndereco = tbl_Endereços.cdEndereco
+INNER JOIN tbl_Cidades ON tbl_Cidades.cdCidade = tbl_Endereços.cdCidade
+INNER JOIN tbl_Estados ON tbl_Estados.cdEstado = tbl_Cidades.cdEstado
+
+SELECT * FROM vw_End_Completo
+
+
+-- Criando VIEW para buscar o JobTitle 'Design Engineer';
+CREATE VIEW Design_Engineer
+AS
+SELECT P.BusinessEntityID, P.FirstName, P.LastName,
+	   HE.JobTitle
+FROM Person.Person P 
+INNER JOIN HumanResources.Employee HE
+ON P.BusinessEntityID = HE.BusinessEntityID
+WHERE HE.JobTitle = 'Design Engineer'
+
+SELECT * FROM Design_Engineer
+
+-- Criando VIEW para calcular Z-Calc;
+CREATE VIEW vw_Zcalc
+AS
+SELECT nmProduto, vlProduto,
+	AVG(vlProduto) OVER() AS Media,
+	STDEV(vlProduto) OVER() AS DesvioPadrao,
+	(vlProduto - AVG(vlProduto) OVER()) / STDEV(vlProduto) OVER()  AS Z_Score
+FROM tbl_Produtos WHERE vlProduto >= 4.0
+--ORDER BY vlProduto
+
+SELECT * FROM vw_Zcalc
