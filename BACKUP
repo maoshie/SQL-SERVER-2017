@@ -1,0 +1,6 @@
+/*
+FAZENDO BACKUP DA tabela tbl_Clientes
+
+*/
+
+SELECT * INTO tbl_ClientesBackup FROM tbl_Clientes
