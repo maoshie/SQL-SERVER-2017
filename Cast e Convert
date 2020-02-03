@@ -1,0 +1,35 @@
+/*
+  Conversão de Tipos de Dados no SQL Server com Cast e Convert;
+  CAST = CAST(expressão AS novo_tipo_dados);
+  Convert a variavel em um NOVO TIPO DE DADOS;
+*/
+
+
+SELECT 'O preço do Livro '  + n_Livro +  ' é de R$' +
+CAST(Preco_Livro AS VARCHAR(6)) AS Item -- converter money para varchar(6)
+FROM tbl_Livros
+ORDER BY Preco_Livro
+
+-- Usado para convertes datas e float/real;
+-- CONVERT( novo_tipo_dado, expressão, estilo)
+
+SELECT 'O preço do Livro '  + n_Livro +  ' é de R$' +
+CONVERT(VARCHAR(6),Preco_Livro)
+FROM tbl_Livros
+ORDER BY Preco_Livro
+
+SELECT * FROM tbl_Livros
+
+-- CONVERT 
+Estilos padrão;
+ 101 = EUA - mm/dd/aaaa
+ 102 = ANSI - aaaa.mm.dd
+ 103 = Britanico/Frances - dd/mm/aaaa
+ 112 = ISO - aaaammdd
+ 109 = PADRÃO - mm dd aaaa
+
+
+SELECT ' a data da Publicação ' + CONVERT( VARCHAR(20),Data_Pub, 103) 
+AS data_da_Publicação
+FROM tbl_Livros
+WHERE ID_Livro = 1
