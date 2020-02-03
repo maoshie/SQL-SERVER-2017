@@ -1,0 +1,15 @@
+/*
+Verifica uma condição se TRUE OR FALSE
+
+*/
+
+-- CHECK CONSTRAINT;
+CREATE TABLE CNH (
+	ID_CNH INT NOT NULL,
+	Nome VARCHAR(200) NOT NULL,
+	Idade INT CHECK(Idade >= 18)
+);
+
+-- Não vai deixar inserir pq é menor que 18 (CHECK CONSTRAINT >= 18)
+INSERT INTO CNH (ID_CNH, Nome, Idade) 
+VALUES (1, 'Marcio', 17)
