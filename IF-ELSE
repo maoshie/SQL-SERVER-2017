@@ -1,0 +1,62 @@
+/*
+  Condicional IF / ELSE no SQL Server - Estrutura de decisão;
+  Testes de condicionais com IF/ELSE;
+*/
+
+----------------------------------------------------
+Sintaxe:
+IF condição
+	Declaração
+--------------------
+IF condição
+	Declaração
+ELSE 
+	declaração
+  
+----------------------------------------------------
+
+-- Utilizar BEGIN/END;
+
+DECLARE @numero INT,
+		@texto varchar(10)
+
+SET @numero = 20
+SET @texto = 'Marcio'
+
+IF @numero = 20
+	SELECT 'Numero Correto!' AS RESULTADO_01 
+----------------------------------------------------
+IF @texto = 'Takashi'
+	BEGIN
+		SET @numero = 30
+		SELECT @numero as Resultado_02
+	END; -- Se o @texto = 'Marcio', vai aparecer o resultado 30;
+------------------------------------------------------
+ELSE -- senao, vai seguir o processo abaixo e mostrar o resultado 'Numero Incorreto'
+	BEGIN
+		SET @numero = 40
+		SELECT 'Numero Incorreto e Nome também!' as RESULTADO_03
+	END;
+----------------------------------------------------------------------------------------
+
+-- Utilizar BEGIN/END;
+
+DECLARE @NOME VARCHAR(30),
+		@MEDIA REAL,
+		@RESULTADO VARCHAR(10)
+SELECT 
+	@NOME = nmAluno,
+	@MEDIA = (tb_Alunos.Nota1 + tb_Alunos.Nota2 + tb_Alunos.Nota3 + tb_Alunos.Nota4)/4
+FROM tb_Alunos
+WHERE nmAluno = 'Ariane'
+	IF @MEDIA >= 7.00
+	BEGIN
+		SELECT @RESULTADO = 'Aprovado';
+	END;
+	ELSE
+	BEGIN
+		SELECT @RESULTADO = 'Reprovado';
+	END;
+
+SELECT 'O Aluno ' + @Nome + ' está ' + @RESULTADO + ' com media '
++ CAST(@MEDIA AS VARCHAR); 
