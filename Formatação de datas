@@ -1,0 +1,17 @@
+/*
+
+*/
+
+-- Funções de Formatação e Manipulação de Data;
+-- Funções de Tempo;
+-- DATE / DATETIME;
+
+-- GETDATE();
+SELECT GETDATE()
+
+-- DATEADD;
+SELECT DATEADD(MONTH, -1, DATEADD(YEAR, -1, GETDATE()))
+
+-- BETWEEN; 
+SELECT * FROM tbl_Vendas WHERE dtVenda BETWEEN DATEADD(YEAR, -4, GETDATE()) AND GETDATE()
+SELECT * FROM tbl_Vendas
