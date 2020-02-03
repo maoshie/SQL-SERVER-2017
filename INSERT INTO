@@ -68,4 +68,12 @@ INSERT INTO tbl_Produtos(nmProduto, vlProduto) VALUES
   ('Halls', 0.5);
   
   
-  
+INSERT INTO tbl_Autores (ID_Autor, Nome_Autor, Sobrenome_Autor)
+VALUES (1, 'Marcio', 'Marcio')
+
+INSERT INTO tbl_Livros (n_Livro, ISBN, Data_Pub, Preco_Livro, ID_Autor, ID_Editora)
+VALUES ('O sol nascendo', 888899997, '20191223', 45.20, 1, 1)
+
+
+
+
