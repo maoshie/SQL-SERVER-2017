@@ -1,0 +1,29 @@
+/*
+
+
+
+*/
+
+-- Criando Stored Procedures;
+
+-- Criação de STORAGE PROCEDURE Total de Vendas por Clientes;
+
+CREATE PROCEDURE sp_TotalVendas(
+	@cdCliente INT
+)
+AS
+SELECT tbl_Vendas.cdVenda, tbl_Clientes.nmCliente, tbl_Produtos.cdProduto, tbl_Produtos.nmProduto, tbl_ProdutoVendas.qtProdutos, tbl_Produtos.vlProduto , qtProdutos * vlProduto AS TotalVendas
+FROM tbl_Produtos 
+	INNER JOIN tbl_ProdutoVendas ON tbl_Produtos.cdProduto = tbl_ProdutoVendas.cdProduto
+	INNER JOIN tbl_Vendas ON tbl_ProdutoVendas.cdVenda = tbl_Vendas.cdVenda
+	INNER JOIN tbl_Clientes ON tbl_Clientes.cdCliente = tbl_Vendas.cdCliente
+	INNER JOIN (
+SELECT tbl_Vendas.cdVenda, SUM(tbl_ProdutoVendas.qtProdutos) AS TotalProdutos, SUM(tbl_Produtos.vlProduto * tbl_ProdutoVendas.qtProdutos) AS TotalVendas
+FROM tbl_Produtos 
+	INNER JOIN tbl_ProdutoVendas ON tbl_Produtos.cdProduto = tbl_ProdutoVendas.cdProduto
+	INNER JOIN tbl_Vendas ON tbl_ProdutoVendas.cdVenda = tbl_Vendas.cdVenda
+GROUP BY tbl_Vendas.cdVenda
+) TOTAL_VENDAS ON tbl_Vendas.cdVenda = TOTAL_VENDAS.cdVenda
+WHERE tbl_Vendas.cdCliente = @cdCliente
+
+-- sp_TotalVendas 3
