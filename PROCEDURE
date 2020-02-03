@@ -1,11 +1,12 @@
 /*
-
-
-
+  Stored Procedures - Criação e Execução
+  São lotes (batches) que podem ser executados em uma subrotina;
+  Permite centralizar a logica de acesso em unico local;
+  Possivel ajustar permissoes de acessos aos users;
 */
 
--- Criando Stored Procedures;
 
+-- Criando Stored Procedures;
 -- Criação de STORAGE PROCEDURE Total de Vendas por Clientes;
 
 CREATE PROCEDURE sp_TotalVendas(
@@ -27,3 +28,31 @@ GROUP BY tbl_Vendas.cdVenda
 WHERE tbl_Vendas.cdCliente = @cdCliente
 
 -- sp_TotalVendas 3
+
+--------------------------------------------------------------
+
+CREATE PROCEDURE teste
+AS SELECT 'Marcio' AS Nome
+
+EXEC teste
+
+SELECT * FROM tbl_Livros
+
+CREATE PROCEDURE P_LivroValor
+AS
+SELECT n_Livro, Preco_Livro
+FROM tbl_Livros
+
+EXEC P_LivroValor   
+
+--------------------------------------------------------------
+
+CREATE PROCEDURE P_LivroISBN
+WITH ENCRYPTION -- Procedimento criptografado
+AS
+SELECT n_Livro, ISBN
+FROM tbl_Livros
+
+EXEC sp_helptext P_LivroISBN
+
+
