@@ -1,0 +1,9 @@
+/*
+
+*/
+
+SELECT n_Livro FROM tbl_livros
+SELECT n_Livro, Preco_Livro, ID_Autor FROM tbl_Livros
+
+SELECT * FROM tbl_Editoras
+
