@@ -17,3 +17,55 @@ INSERT INTO tbl_Clientes VALUES ('Harian Git', '1993-10-23', 'Feminino', 'Rua Jo
 
 -- Inserindo Vendas na tbl_Vendas;
 INSERT INTO tbl_Vendas VALUES(3,'2019-05-23')
+
+
+INSERT INTO tbl_Estados (nmSigla, nmEstado )
+VALUES
+  ('AC', 'Acre'),
+  ('AL', 'Alagoas'),
+  ('AP', 'Amapá'),
+  ('AM', 'Amazonas'),
+  ('BA', 'Bahia'),
+  ('CE', 'Ceará'),
+  ('DF', 'Distrito Federal'),
+  ('ES', 'Espírito Santo'),
+  ('GO', 'Goiás'),
+  ('MA', 'Maranhão'),
+  ('MT', 'Mato Grosso'),
+  ('MS', 'Mato Grosso do Sul'),
+  ('MG', 'Minas Gerais'),
+  ('PA', 'Pará'),
+  ('PE', 'Pernambuco'),
+  ('PI', 'Piauí'),
+  ('RJ', 'Rio de Janeiro'),
+  ('RN', 'Rio Grande do Norte'),
+  ('RS', 'Rio Grande do Sul'),
+  ('RO', 'Rondônia'),
+  ('RR', 'Roraima'),
+  ('SC', 'Santa Catarina'),
+  ('SE', 'Sergipe'),
+  ('TO', 'Tocantins');
+  
+  
+  -- Inserindo dados na tabela tbl_Produtos;
+
+SELECT * FROM tbl_Produtos
+INSERT INTO tbl_Produtos(nmProduto, vlProduto) VALUES 
+  ('Suco de Morango', 4.0), 
+  ('Suco de Caju', 5.0),
+  ('Suco de Limão', 4.0),
+  ('Coxinha', 3.5),
+  ('X-Salada', 8.0),
+  ('X-Burguesinho', 13.0),
+  ('Infartinho', 10),
+  ('Ai, que delícia!', 9.50),
+  ('X-Marciao', 12.0),
+  ('Porção de Gato Minhon', 15.0),
+  ('Sorvete Milho Azedo', 20.0),
+  ('Refrigerante', 4.5),
+  ('Refrigerante 2L', 8.0),
+  ('Pão de farinha', 3.0),
+  ('Halls', 0.5);
+  
+  
+  
