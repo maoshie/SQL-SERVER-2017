@@ -1,0 +1,12 @@
+/*
+
+
+*/
+
+-- IDENTITY - Auto-incremento;
+
+IDENTITY(x,x)
+- Auto Incremento que gera um unico numero;
+- Não é possivel alterar uma coluna existente para configurar IDENTITY;
+- Se necessário, Crie uma nova tabela com IDENTITY e exclua a atual;
+- Só é permitido usar uma coluna IDENTITY por tabela;
