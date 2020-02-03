@@ -8,22 +8,35 @@ SET
 TRUNCATE
 
 */
-
 -- TRUNCATE TABLE = excluir todas as informações da tabela;
 
--- Removendo uma coluna;
+Sintaxe:
+ALTER TABLE nome_tabela
+ADD coluna VARCHAR/INT NULL/NOT NULL 
+
+ -- Excluir uma CONSTRAINT
+ ALTER TABLE nome da tabela
+ DROP CONSTRAINT nome_constraint
+
+-- Excluir uma coluna;
 ALTER TABLE tbl_Clientes
 DROP COLUMN nmEndereco;
 
--- Alterando p Tipo da coluna;
+-- Alterando o Tipo da coluna;
 ALTER TABLE nometabela
 ALTER COLUMN coluna VARCHAR(50) NOT NULL
 
+-- Alterar uma coluna;
+ALTER TABLE tbl_Livros
+ALTER COLUMN ID_Livro = 10
 
 -- NOVA coluna na tabela;
 ALTER TABLE tbl_Clientes
 ADD cdEndereco INT NULL; 
 
+-- adicionar chave primaria,
+ALTER TABLE nome da tabela
+ADD PRIMARY KEY(ID_xx)
 
 -- Adicionando uma CONSTRAINT na tabela;
 ALTER TABLE tbl_Clientes
