@@ -1,0 +1,72 @@
+/*
+
+
+
+*/
+
+
+-- Soma dos valores Utilizando Group By;
+SELECT tbl_Clientes.nmCliente, tbl_Produtos.nmProduto, SUM(qtProdutos) AS qtProdutos, tbl_Produtos.vlProduto,
+	   tbl_Produtos.vlProduto * tbl_ProdutoVendas.qtProdutos AS Total
+FROM tbl_Produtos 
+	INNER JOIN tbl_ProdutoVendas ON tbl_Produtos.cdProduto = tbl_ProdutoVendas.cdProduto
+	INNER JOIN tbl_Vendas ON tbl_ProdutoVendas.cdVenda = tbl_Vendas.cdVenda
+	INNER JOIN tbl_Clientes ON tbl_Clientes.cdCliente = tbl_Vendas.cdCliente
+GROUP BY tbl_Clientes.nmCliente, tbl_Produtos.nmProduto, tbl_Produtos.vlProduto, tbl_ProdutoVendas.qtProdutos
+
+-- EXCLUINDO DUPLICIDADE;
+
+-- Salvar os duplicados;
+
+SELECT nmProduto, vlProduto
+INTO #tmp_Backup_Produto
+FROM tbl_Produtos
+WHERE nmProduto in(
+SELECT nmProduto
+FROM tbl_Produtos 
+GROUP BY nmProduto
+HAVING COUNT(*) >=2
+)
+-- Descobrir os duplicados;
+
+SELECT nmProduto, vlProduto
+FROM tbl_Produtos
+WHERE nmProduto in (
+SELECT COUNT(*) nmProduto -- Conta quantos itens tem cada Produto
+FROM tbl_Produtos 
+GROUP BY nmProduto
+HAVING COUNT(*) >=2
+)
+
+-- Apagar os duplicados da base principal;
+-- Só é possivel deletar se não tiver restrição no Produto;
+-- 
+DELETE FROM tbl_Produtos WHERE nmProduto in(
+SELECT nmProduto
+FROM tbl_Produtos 
+GROUP BY nmProduto
+HAVING COUNT(*) >=2
+) 
+
+
+-- Soma dos valores Utilizando Group By;
+SELECT tbl_Clientes.nmCliente, tbl_Produtos.nmProduto, SUM(qtProdutos) AS qtProdutos, tbl_Produtos.vlProduto,
+	   tbl_Produtos.vlProduto * tbl_ProdutoVendas.qtProdutos AS Total
+FROM tbl_Produtos 
+	INNER JOIN tbl_ProdutoVendas ON tbl_Produtos.cdProduto = tbl_ProdutoVendas.cdProduto
+	INNER JOIN tbl_Vendas ON tbl_ProdutoVendas.cdVenda = tbl_Vendas.cdVenda
+	INNER JOIN tbl_Clientes ON tbl_Clientes.cdCliente = tbl_Vendas.cdCliente
+GROUP BY tbl_Clientes.nmCliente, tbl_Produtos.nmProduto, tbl_Produtos.vlProduto, tbl_ProdutoVendas.qtProdutos
+
+
+-- Soma TOTAL dos valores Utilizando Group By; CONDIÇÃO = WHERE 
+SELECT tbl_Clientes.nmCliente, SUM(tbl_ProdutoVendas.qtProdutos) AS TotalProdutos, SUM(tbl_Produtos.vlProduto * tbl_ProdutoVendas.qtProdutos) AS TotalVendas
+	   --tbl_Produtos.vlProduto * tbl_ProdutoVendas.qtProdutos AS Total
+FROM tbl_Produtos 
+	INNER JOIN tbl_ProdutoVendas ON tbl_Produtos.cdProduto = tbl_ProdutoVendas.cdProduto
+	INNER JOIN tbl_Vendas ON tbl_ProdutoVendas.cdVenda = tbl_Vendas.cdVenda
+	INNER JOIN tbl_Clientes ON tbl_Clientes.cdCliente = tbl_Vendas.cdCliente
+WHERE nmCliente = 'Marcio Oshie'
+GROUP BY tbl_Clientes.nmCliente
+
+
