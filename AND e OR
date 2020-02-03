@@ -1,13 +1,11 @@
 /*
 
+AND e OR - Operadores Lógicos
+Filtrar registros com mais de uma condição!
+AND = mostra 1 registro se ambas as condições forem TRUE;
+OR = mostra 1 registro se pelo menos uma for TRUE;
 
 */
-
--- AND e OR - Operadores Lógicos
-
-- Filtrar registros com mais de uma condição!
-- AND = mostra 1 registro se ambas as condições forem TRUE;
-- OR = mostra 1 registro se pelo menos uma for TRUE;
 
 SELECT * FROM tbl_Livros ORDER BY Preco_Livro
 SELECT * FROM tbl_Livros WHERE Preco_Livro > 36.00 AND Preco_Livro < 90.00
