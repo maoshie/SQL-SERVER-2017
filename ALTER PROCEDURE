@@ -1,5 +1,5 @@
 /*
-  Stored Procedures - Alteração e Parâmetros de Entrada no SQL Server - parte 02
+  41 - Stored Procedures - Alteração e Parâmetros de Entrada no SQL Server - parte 02
   ALTER PROCEDURE;
 */ 
 
@@ -34,3 +34,112 @@ SELECT @par2
 
 --EXEC teste 26, 'Laranja' 
 EXEC teste @par1 = 25, @par2 = 'emprego'
+
+----------------------------------------------------------------------------------------------------------------;
+/*
+  42 - Stored Procedures - Parâmetros de Entrada e INSERT no SQL Server - parte 03;
+*/
+
+
+SELECT * FROM tbl_Livros
+
+ALTER PROCEDURE P_LivroValor
+(@ID SMALLINT, @Preco MONEY)
+AS 
+SELECT n_Livro, Preco_Livro
+FROM tbl_Livros
+WHERE ID_Livro > @ID AND Preco_Livro > @Preco
+
+SELECT * FROM tbl_Livros
+EXEC P_LivroValor @ID = 2, @Preco = 35.00
+
+---------------------------------------------------------------------------
+
+-- Desejo fornecer o ID e a quantidade de um titulo adquirido,
+-- e saber o valor total pago pelos livros;
+
+ALTER PROCEDURE P_LivroValor (@Quantidade SMALLINT, @ID SMALLINT)
+AS
+SELECT * FROM tbl_Livros
+EXEC P_LivroValor @ID = 9, @Quantidade = 4
+
+---------------------------------------------------------------------------
+
+SELECT * FROM tbl_Editoras
+
+-- Criar uma PROCEDURE para inserir nome na tbl_Editoras;
+
+CREATE PROCEDURE P_insere_Editora(@Nome VARCHAR(50))
+AS 
+INSERT INTO tbl_Editoras (Nome_Editora) VALUES (@Nome)
+
+EXECUTE P_insere_Editora @Nome = 'Bookmark Press'
+
+----------------------------------------------------------------------------------------------------------------;
+/*
+43 - Stored Procedures - Parâmetros de Saída e RETURN no SQL Server - parte 04;
+*/
+
+
+-- PARAMETROS DE SAIDA / RETURN / OUTPUT;
+
+Sintaxe:
+CREATE  PROCEDURE P_teste_valor_padrao(@parametro1 VARCHAR(20), 
+				  @parametro2 VARCHAR(20) = 'Valor Padrão!')
+AS
+SELECT 'Valor do Parametro1 ' + @parametro1
+SELECT 'Valor do Parametro2 ' + @parametro2 
+
+EXECUTE P_teste_valor_padrao 18 -- Executar apenas o 1-Parametro!
+EXECUTE P_teste_valor_padrao @parametro1 = 25, @parametro2 = ' Qualquer Valor'
+
+------------------------------------------------------------------------------------
+
+ALTER PROCEDURE teste (@parametro1 AS INT OUTPUT)
+AS 
+SELECT @parametro1 * 2
+RETURN 
+
+DECLARE @valor AS INT = 15
+EXECUTE teste @valor OUTPUT 
+PRINT @valor
+
+--------------------------------------
+/*
+P_LivroValor
+P_teste_valor_padrao
+teste
+P_insere_Editora
+P_LivroISBN
+*/
+---------------------------------------
+
+------------------------------------------------------------------------------------
+-- RETURN - Termina o procedimento e retorna um valor inteiro;
+-- Usado para retornar status de sucesso ou falha no procedimento;
+SELECT * FROM tbl_Livros
+
+--------------------------------------------------------------------------------------
+ALTER PROCEDURE P_LivroValor(@quantidade SMALLINT, @cod SMALLINT = -15, @ID SMALLINT)
+AS
+SET NOCOUNT OFF
+IF @ID >= 3
+	BEGIN
+		SELECT n_Livro AS Livro, Preco_Livro * @quantidade AS Preço
+		FROM tbl_Livros
+		WHERE ID_Livro = @ID
+		RETURN 1
+	END
+ELSE
+	RETURN @cod
+
+
+DECLARE @Codigo INT
+EXECUTE @Codigo = P_LivroValor @ID = 5, @quantidade = 2
+PRINT @Codigo 
+
+
+
+
+
+
