@@ -1,9 +1,21 @@
 /*
-
-
-
-
+  INNER JOIN;
+  Usado para obter dados de duas ou mais tabelas;
+  INNER JOIN = Retorna linhas quando houver uma correspondencia em ambas
 */
+
+Sintaxe:
+ SELECT colunas 
+ FROM tabela1
+ INNER JOIN tabela2
+ ON tabela1.coluna = tabela2.coluna
+ 
+ 
+-- Retorna TUDO da tabela Livros;
+ SELECT * FROM tbl_Livros
+ INNER JOIN tbl_Autores
+ ON tbl_Livros.ID_Autor = tbl_Autores.ID_Autor
+
 
 -- Soma dos valores da tabela tbl_ProdutoVendas com INNER JOIN;
 SELECT tbl_Clientes.cdCliente, tbl_Clientes.nmCliente, 
