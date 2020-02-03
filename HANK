@@ -1,0 +1,23 @@
+/*
+
+
+*/
+
+-- Usando a função RANK;
+
+SELECT * FROM tbl_Produtos Order by vlProduto desc
+
+-- Utilizando RANK para ordenar por posição;
+-- Valor Menor > Maior;
+SELECT nmProduto, vlProduto,
+	RANK() OVER(ORDER BY vlProduto DESC) AS Posição 
+	FROM tbl_Produtos
+
+-- Utilizansdo SUBSELECT para retornar um resultado especifico;
+SELECT nmProduto, vlProduto, posição
+FROM(
+	SELECT nmProduto, vlProduto,
+	RANK() OVER(ORDER BY vlProduto DESC) AS Posição FROM tbl_Produtos)
+	Dados 
+--WHERE Posição <= 5
+WHERE Posição BETWEEN 2 AND 8
