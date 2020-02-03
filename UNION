@@ -1,8 +1,7 @@
 /*
-
-	UNION - Unir resultados de declarações SELECT;
-	Permite combinar duas ou mais declarações SELECT;
-	Cada SELECT deve ter o mesmo numero de colunas, tipos de dados e ordem;
+  UNION - Unir resultados de declarações SELECT;
+  Permite combinar duas ou mais declarações SELECT;
+  Cada SELECT deve ter o mesmo numero de colunas, tipos de dados e ordem;
 
 /*
 
