@@ -1,0 +1,22 @@
+/*
+  Criação de campos calculados;
+
+*/
+
+
+-- Tabela com multiplicação;
+CREATE TABLE tbl_Produtos (
+	cdProduto INT,
+	nmProduto VARCHAR(50),
+	Preco_Produto MONEY,
+	Quantidade INT,
+	Total AS (Preco_Produto * Quantidade)
+
+
+SELECT tbl_Produtos.nmProduto AS Produto, tbl_Produtos.Quantidade as Quantidade, tbl_Produtos.Preco_Produto AS Preco,
+	   tbl_Autores.Nome_Autor AS Nome, tbl_Autores.Sobrenome_Autor AS Sobrenome
+FROM tbl_Autores INNER JOIN tbl_Produtos
+ON tbl_Autores.ID_Autor = tbl_Produtos.cdProduto
+
+SELECT SUM(Total) FROM tbl_Produtos
+SELECT SUM(Preco_Livro) from tbl_Livros
