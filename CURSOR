@@ -1,0 +1,31 @@
+/*
+
+*/
+
+-- Criando Cursores;
+
+-- Variaveis do Cursor;
+DECLARE @FirstName VARCHAR(50),
+		@MiddleName VARCHAR(50),
+		@LastName VARCHAR(50)
+
+-- Criand um Cursor;
+DECLARE cur_NomeCompleto CURSOR
+FOR SELECT FirstName, MiddleName, LastName FROM Person.Person;
+
+-- Abrindo o Cursor;
+OPEN cur_NomeCompleto;
+
+-- Selecionar os dados;
+FETCH NEXT FROM cur_NomeCompleto
+INTO @FirstName, @MiddleName, @LastName;
+
+SELECT @FirstName, @MiddleName, @LastName;
+
+-- Fechando e desalocando o cursor da memoria;
+CLOSE cur_NomeCompleto;
+DEALLOCATE cur_NomeCompleto;
+
+
+SELECT * FROM Person.Person WHERE FirstName = 'Ken'
+SELECT TOP 100 * FROM HumanResources.Employee 
