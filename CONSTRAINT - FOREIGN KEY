@@ -1,3 +1,18 @@
+
+/*
+
+CONSTRAINTS (Restrições);
+
+- NOT NULL => Não aceita valores NULOS (Em Branco);
+- UNIQUE   => Valor unico que não pode ser repetido (CPF); 
+- PRIMARY KEY => Chave Primaria de cada Tabela - Registros;
+- FOREIGN KEY => Chave Estrangeira que aponta para uma chave Primaria;
+		CONSTRAINT fk_ID_Autor FOREIGN KEY(ID_Autor)
+		REFERENCES tbl_autores(ID_Autor)
+- CHECK   => Limita uma faixa de valores na coluna; 
+- DEFAULT =>  Restrição de um valor padrão na coluna; ( Sao Paulo, 011)
+*/
+
 -- Adicionar uma CONSTRAINT na tabela Vendas.
 ALTER TABLE tbl_Vendas -- Altera chave da tabela;
 ADD CONSTRAINT fk_Produto_Vendas -- add regra (nome_regra);
