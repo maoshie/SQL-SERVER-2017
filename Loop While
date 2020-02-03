@@ -1,0 +1,41 @@
+/*
+  Loop While no SQL Server - Estrutura de Repetição;
+  Executa um codigo enquanto ela for verdadeira;
+  BEGIN/END utilizar apenas se tiver mais que 1 condição; 
+/*
+
+----------------------------------------------------
+Sintaxe:
+WHILE condição (for TRUE)
+	BEGIN
+		bloco de codigos;
+	END;
+----------------------------------------------------
+
+-- Utilizar BEGIN/END;
+
+DECLARE @valor VARCHAR(2)
+SET @valor = 0
+
+WHILE @valor < 10
+	BEGIN
+		PRINT 'Numero:' + @valor
+		SET @valor = @valor+1
+	END;
+
+SELECT * FROM tbl_Livros
+
+----------------------------------------------------
+
+-- Utilizar BEGIN/END
+
+DECLARE @codigo INT
+SET @codigo = 1
+
+WHILE @codigo < 5
+	BEGIN
+		SELECT ID_Livro, n_Livro, Preco_Livro
+		FROM tbl_Livros
+		WHERE ID_Livro = @codigo
+		SET @codigo = @codigo+1
+	END;
