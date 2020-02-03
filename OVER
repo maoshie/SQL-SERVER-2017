@@ -1,0 +1,16 @@
+/*
+
+
+*/
+
+-- Usando Over;
+
+--Calculando os valores da tabela sem o GROUP BY;
+-- Media, DesvioPadrao, Z Score;
+-- Utilizando OVER();
+
+SELECT nmProduto, vlProduto,
+	AVG(vlProduto) OVER() AS Media,
+	STDEV(vlProduto) OVER() AS DesvioPadrao,
+	(vlProduto - AVG(vlProduto) OVER()) / STDEV(vlProduto) OVER()  AS Z_Score
+FROM tbl_Produtos
