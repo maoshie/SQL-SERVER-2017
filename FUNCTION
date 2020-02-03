@@ -39,3 +39,90 @@ ON P.BusinessEntityID = HE.BusinessEntityID
 
 -- Especificando a busca com WHERE;
 WHERE P.BusinessEntityID = 2 
+
+--------------------------------------------------------------------------------------------------------;
+/*
+  44 - Funções Definidas pelo Usuário - Função Escalar
+  Criar varias funções;
+  Inserir logica complexa em consultas;
+  Criar novas funções para expressões complexas;
+  substituir exibições com a vantagem de aceitar parametros;
+  UDF ( Funções escalares, valor de tabela embutida, valor de tabela milti-instruções)
+  Funções Escalares;
+  Retorna apenas um unico valor;
+*/
+
+--------------------------------------------------------------;
+Sintaxe:
+CREATE FUNCTION nome_função(parametro)
+RETURNS tipo_de_dado_retorno
+AS 
+BEGIN
+	bloco de codigos
+	RETURN expressão_retorno
+END
+--------------------------------------------------------------;
+
+-- Retorna apenas 1 valor;
+
+CREATE FUNCTION nota_media(@nome VARCHAR(30))
+RETURNS REAL
+AS
+	BEGIN
+		DECLARE @media REAL
+		SELECT @media = (Nota1 + Nota2 + Nota3 + Nota4 * 2)/5.00
+		FROM tb_Alunos
+		WHERE nmAluno = @nome
+		RETURN @media
+	END
+
+SELECT dbo.nota_media ('Marcio') -- colocar sempre o nome completo(dbo.nome_Função)
+
+--------------------------------------------------------------------------------------------------------;
+/*
+  45 - Valor de Tabela Embutida
+  Função com valo de tabela embutida (Inline);
+  Permite utilizar parametros e retorna conjunto completo de dados;
+/*
+
+--------------------------------------------------------------;
+Sintaxe: 
+CREATE FUNCTION nome_função(parametros)
+RETURNS Table
+AS
+RETURN(declaração_Select)
+----------------------------------------------------------------------------------------------;
+
+-- Permite utilizar parametros e retorna conjunto completo de dados;
+
+CREATE FUNCTION retona_itens(@valor REAL)
+RETURNS Table
+AS
+RETURN(
+	SELECT tbl_Livros.n_Livro, tbl_Livros.Preco_Livro, tbl_Autores.Nome_Autor, tbl_Editoras.Nome_Editora 
+	FROM tbl_Livros INNER JOIN tbl_Autores ON tbl_Livros.ID_Autor = tbl_Autores.ID_Autor
+					INNER JOIN tbl_Editoras ON tbl_Livros.ID_Editora = tbl_Editoras.ID_Editora
+	WHERE tbl_Livros.Preco_Livro > @valor)
+
+SELECT n_Livro, Nome_Autor, Nome_Editora
+FROM retona_itens(25.00)
+
+---------------------------------------------------------------------------------------------------;
+/*
+  46 - Valor de Tabela com Várias Instruções;
+/*
+
+CREATE FUNCTION multi_tabela ()
+RETURNS @valores Table
+	(Nome_Livro VARCHAR(50), Dia_Pub DATE, Pre_Livro MONEY, Nome_Editora VARCHAR(50)) 
+AS
+BEGIN
+	INSERT @valores(Nome_Livro, Dia_Pub, Pre_Livro, Nome_Editora)
+	SELECT tbl_Livros.n_Livro, tbl_Livros.Data_Pub, tbl_Livros.Preco_Livro, tbl_Editoras.Nome_Editora
+	FROM tbl_Livros INNER JOIN tbl_Editoras ON tbl_Livros.ID_Editora = tbl_Editoras.ID_Editora
+	RETURN
+END
+
+SELECT * FROM multi_tabela()
+
+
