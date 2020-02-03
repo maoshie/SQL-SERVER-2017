@@ -1,0 +1,27 @@
+
+/*
+ALTER TABLE nomeTabela
+ADD
+DROP
+SET
+*/
+
+-- Removendo uma coluna;
+ALTER TABLE tbl_Clientes
+DROP COLUMN nmEndereco;
+
+-- Alterando p Tipo da coluna;
+ALTER TABLE nometabela
+ALTER COLUMN coluna VARCHAR(50) NOT NULL
+
+
+-- NOVA coluna na tabela;
+ALTER TABLE tbl_Clientes
+ADD cdEndereco INT NULL; 
+
+
+-- Adicionando uma CONSTRAINT na tabela;
+ALTER TABLE tbl_Clientes
+ADD CONSTRAINT fk_Clientes_Endereços
+FOREIGN KEY(cdEndereco)
+REFERENCES tbl_Endereços(cdEndereco);
