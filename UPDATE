@@ -3,6 +3,12 @@ Utilizando o comando UPDATE para atualizar um registro na tabela;
 
 */
 
+-- ATUALIZAR UMA TABELA;
+
+UPDATE nome_tabela SET coluna = 'novo registro'
+WHERE colunaAtual = 'xxx'
+
+
 -- Atualizar mais de um registro;
 UPDATE nomeTabela
 SET coluna1 = valor1 = 'Valor novo'
