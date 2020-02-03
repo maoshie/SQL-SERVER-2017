@@ -1,0 +1,51 @@
+/*
+Utilizando o comando UPDATE para atualizar um registro na tabela;
+
+*/
+
+-- Atualizar mais de um registro;
+UPDATE nomeTabela
+SET coluna1 = valor1 = 'Valor novo'
+    coluna2 = valor2 = 'Valor novo'
+WHERE condição (Onde)
+
+
+-- ADICIONANDO um numero novo na coluna nmTelefone02
+UPDATE tbl_Clientes 
+SET nmTelefone02 = '11 98585-1515'
+WHERE cdCliente = 1
+
+
+-- Atualizar uma coluna específica;
+UPDATE #tmp_Estados SET nmSigla = 'SP'
+WHERE nmEstado = 'São Paulo'
+
+
+exemplo:
+----- INSERINDO na tabela CIDADES;
+UPDATE #tmp_cidades 
+SET #tmp_cidades.cdEstado = tbl_Estados.cdEstado
+FROM #tmp_cidades
+
+exemplo:
+Inserindo dados da tabela ENDEREÇOS com INNER JOIN;
+UPDATE tbl_Clientes SET
+tbl_Clientes.cdEndereco = tbl_Endereços.cdEndereco
+FROM tbl_Endereços INNER JOIN tbl_Clientes ON tbl_Endereços.nmEndereco = tbl_Clientes.nmEndereco
+
+
+--Inserindo dados da tabela #tmp_Cidades com INNER JOIN;
+UPDATE #tmp_cidades 
+SET #tmp_cidades.cdEstado = tbl_Estados.cdEstado
+FROM #tmp_cidades 
+INNER JOIN tbl_Clientes ON #tmp_cidades.nmCidade = tbl_Clientes.nmCidade
+INNER JOIN tbl_Estados ON tbl_Clientes.nmEstado = tbl_Estados.nmEstado
+
+
+-- Atualizar a tbl_Endereços = cdEndereco;
+UPDATE tbl_Clientes SET
+tbl_Clientes.cdEndereco = tbl_Endereços.cdEndereco
+FROM tbl_Endereços INNER JOIN tbl_Clientes ON tbl_Endereços.nmEndereco = tbl_Clientes.nmEndereco
+
+
+
