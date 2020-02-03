@@ -1,0 +1,39 @@
+/*
+
+
+*/
+
+Sintaxe:
+ALTER DATABASE nome_banco_dados
+SET RECURSIVE_TRIGGERS ON|OFF 
+
+-- Nova tabela TRIGGER;
+CREATE TABLE tbl_trigger_recursivo (
+	codigo INT PRIMARY KEY
+) 
+--Verificar se foi criada a tabela;
+SELECT Codigo FROM tbl_trigger_recursivo
+
+DROP TRIGGER trigger_rec
+
+CREATE TRIGGER trigger_rec ON tbl_trigger_recursivo
+AFTER INSERT
+AS
+DECLARE @cod INT
+SELECT @cod = MAX(codigo) FROM tbl_trigger_recursivo
+IF @cod < 10 -- Condição de saida do  1- TRIGGER 
+	BEGIN
+		INSERT INTO tbl_trigger_recursivo SELECT MAX(codigo) + 1 
+		FROM tbl_trigger_recursivo
+		END
+ELSE
+	BEGIN
+		PRINT'Trigger Recursivo Finalizado!' -- Condição de saida 2-TRIGGER;
+	END
+
+INSERT INTO tbl_trigger_recursivo VALUES (1)
+
+SELECT Codigo FROM tbl_trigger_recursivo
+
+
+
