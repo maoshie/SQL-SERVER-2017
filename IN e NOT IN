@@ -1,0 +1,13 @@
+/*
+  Operadores IN e NOT IN - Filtros de Múltiplas Condições;
+  IN = Filtro de multiplas condições;
+  Retorna o valor da consulta;
+  Expressão_teste NOT/IN (subconsulta/lista);
+*/
+
+
+SELECT  * FROM tbl_Livros
+WHERE ID_Autor IN(1,3) -- Volta apenas os ID(1 e 3);
+
+SELECT  * FROM tbl_Livros
+WHERE ID_Autor NOT IN(1,3) --Volta apenas os ID(2,4,5);
