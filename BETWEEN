@@ -1,0 +1,17 @@
+/*
+  BETWEEN - Seleção de Intervalos em Registros;
+
+*/
+
+Sintaxe:
+SELECT colunas FROM tabela
+WHERE coluna BETWEEN valor1 AND valor2
+
+SELECT * FROM tbl_Livros -- Mostra tudo da tabela;
+WHERE Data_Pub BETWEEN '20090819' AND '20160329'
+ORDER BY Data_Pub
+
+SELECT n_Livro AS Livro, Data_Pub AS d_Publicação, Preco_Livro AS Preco
+FROM tbl_Livros ORDER BY Data_Pub
+WHERE Preco_Livro BETWEEN 30.00 AND 70.00
+ORDER BY Data_Pub
