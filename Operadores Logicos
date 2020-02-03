@@ -1,0 +1,20 @@
+/*
+
+
+*/
+
+-- Operadores Lógicos;
+--DATEDIFF = Busca a diferença entre dois valores declarados;
+
+Sintaxe: 
+WHERE DATEDIFF(ANO, COLUNA, GETDATE()) operadores lógicos 
+WHERE DATEDIFF(YEAR, COLUMN, GETDATE()) <=> 30
+
+-- Verificar Identificação Sexual;
+WHERE DATEDIFF(YEAR, COLUMN, GETDATE()) <=> 30
+AND Sexo = 'Masculino' ou 'Feminino'
+
+-- Operador AND;
+SELECT * FROM tbl_Produtos 
+WHERE vlProduto >= 4.0 AND vlProduto <= 15.00
+ORDER BY vlProduto
