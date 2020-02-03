@@ -1,0 +1,28 @@
+/*
+  Subconsultas (subqueries) com Tabelas Derivadas;
+  Subquery = declaração embutida em uma consulta; 
+  SELECT (SELECT'Marcio')AS SUBQUERY
+*/
+
+
+--RETORNA (cliente, nome Produto, qtde, preço, e valor total);
+SELECT CL.nmCliente AS Cliente, PR.nmProduto AS Nome_Produto, CO.Quantidade, 
+		PR.Preco_Produto AS Preco_Produto, PR.Preco_Produto * CO.Quantidade AS Total_Gastos		
+FROM tb_Clientes AS CL
+INNER JOIN tb_Compras AS CO ON CO.ID_Cliente = CL.ID_Cliente
+INNER JOIN tb_Produtos AS PR ON PR.ID_Produto = CO.ID_Produto
+ORDER BY Quantidade DESC
+
+
+
+--Busca por Total gastos por clientes;
+-- Nome Cliente, Quantidade, Total / cliente;
+
+SELECT Resultado.Cliente, Resultado.Quantidade, SUM(Resultado.Total_Gastos) AS Total
+FROM
+(SELECT CL.nmCliente AS Cliente, CO.Quantidade, PR.Preco_Produto * CO.Quantidade AS Total_Gastos		
+FROM tb_Clientes AS CL
+INNER JOIN tb_Compras AS CO ON CO.ID_Cliente = CL.ID_Cliente
+INNER JOIN tb_Produtos AS PR ON PR.ID_Produto = CO.ID_Produto) AS Resultado
+GROUP BY Resultado.Cliente, Resultado.Quantidade
+ORDER BY Total
