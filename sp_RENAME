@@ -1,0 +1,13 @@
+/*
+Utilizadeo para RENOMEAR uma coluna ou tabela;
+
+*/
+
+-- RENOMEAR COLUNA
+sp_RENAME 'nomeTabela.nomecolunaatual', 'nomecolunanova', 'COLUMN'
+sp_rename 'tbl_Livros.n_Livro', 'Livro', 'COLUMN'
+
+
+-- RENOMEAR TABELA --
+sp_RENAME 'nomeatualtabela', 'NovoNome'
+sp_RENAME 'tbl_Video', 'tbl_Videos'
