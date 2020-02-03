@@ -1,0 +1,30 @@
+/*
+
+
+
+
+*/
+
+-- Soma dos valores da tabela tbl_ProdutoVendas com INNER JOIN;
+SELECT tbl_Clientes.cdCliente, tbl_Clientes.nmCliente, 
+	   tbl_Produtos.nmProduto, tbl_Produtos.vlProduto, tbl_ProdutoVendas.qtProdutos, 
+	   tbl_Produtos.vlProduto * tbl_ProdutoVendas.qtProdutos AS Total
+FROM tbl_Produtos 
+	INNER JOIN tbl_ProdutoVendas ON tbl_Produtos.cdProduto = tbl_ProdutoVendas.cdProduto
+	INNER JOIN tbl_Vendas ON tbl_ProdutoVendas.cdVenda = tbl_Vendas.cdVenda
+	INNER JOIN tbl_Clientes ON tbl_Clientes.cdCliente = tbl_Vendas.cdCliente
+  
+  
+  -- INNER JOIN Com tbl_clientes e tbl_Cidades
+INSERT INTO tbl_Endereços (nmEndereco, cdCidade)
+SELECT tbl_Clientes.nmEndereco, tbl_Cidades.cdCidade
+FROM tbl_Clientes INNER JOIN tbl_Cidades
+ON tbl_Cidades.nmCidade = tbl_Clientes.nmCidade
+
+
+-- SELECT VOLTADO OS SEGUINTES DADOS; tbl_Clientes.nmCliente, tbl_Endereços.nmEndereco, tbl_Cidades.nmCidade, tbl_Estados.nmEstado
+SELECT tbl_Clientes.nmCliente, tbl_Endereços.nmEndereco, tbl_Cidades.nmCidade, tbl_Estados.nmEstado
+FROM tbl_Clientes 
+INNER JOIN tbl_Endereços ON tbl_Clientes.cdEndereco = tbl_Endereços.cdEndereco
+INNER JOIN tbl_Cidades ON tbl_Cidades.cdCidade = tbl_Endereços.cdCidade
+INNER JOIN tbl_Estados ON tbl_Estados.cdEstado = tbl_Cidades.cdEstado
