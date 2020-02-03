@@ -1,0 +1,12 @@
+/*
+
+TOP - Especificar número de registros a retornar;
+Usado para especificar o numero de registros a retornar;
+Util para tabelas com muitos registros;
+
+*/
+
+Sintaxe:
+SELECT TOP  numero|percentual colunas FROM tabela;
+
+SELECT TOP 3 n_Livro FROM tbl_Livros
