@@ -1,0 +1,25 @@
+/*
+
+
+
+*/
+
+
+--(Aula 11) - Operadores de Comparação (Parte 1);
+/*
+=  Igual
+<>  Diferente
+>  Maior
+>= Maior ou Igual
+<  Menor
+<= Menor ou Igual
+*/
+
+-- Retorna resultado com valores >= a 4.0;
+-- condição WHERE;
+SELECT nmProduto, vlProduto,
+	AVG(vlProduto) OVER() AS Media,
+	STDEV(vlProduto) OVER() AS DesvioPadrao,
+	(vlProduto - AVG(vlProduto) OVER()) / STDEV(vlProduto) OVER()  AS Z_Score
+FROM tbl_Produtos WHERE vlProduto >= 4.0
+ORDER BY vlProduto
