@@ -1,7 +1,81 @@
 /*
+-- 47 - TRIGGERS DML - ( Data Manipulation Language );
+ 
+ -- TRIGGERS -- Tipo especial de STOREGE PROCEDURE executado pelo user em uma tabela especifica;
+ -- podem ser ( INSERT - UPDATE - DELETE );
+ -- Disparam respostas apenas aos comandos DML;
+ -- Disparados em dois modos (After - Instead Of);
+ -- After = É executado apos todas as ações terem sido Completadas;
+ -- Instead Of = É executado no lugar da operação que causou seu disparo;
+ 
+ -- FLUXO DE TRANSAÇÕES -- 
+ 1- Verificação de IDENTITY INSERT;
+ 2- Restrição (Constraint) de Nulos (NULL);
+ 3- Checagem de tipos de dados;
+ 4- Execução de triggers INSTEAD OF (a execução de DML para aqui, não é recursivo);
+ 5- Restrição de PRIMARY KEY;
+ 6- Restrição 'Check';
+ 7- Restrição FOREIGN KEY;
+ 8- Execução do DML e ataulização do log de transações;
+ 9- Execução do TRIGGER AFTER;
+ 10- Commit da transação (Confirmada);
+ */
 
+---------------------------------------------------------------------------------------------------;
+Sintaxe:
+CREATE TRIGGER nome_trigger
+ON tabela/view
+[WITH ENCRYPTION]
+	AFTER/INSTEAD OF
+		[INSERT, UPDATE, DELETE]
+AS
+codigo do trigger
+---------------------------------------------------------------------------------------------------;
 
+-- 48 - Triggers - Criação e Testes dos modos Instead Of e After - Parte 02;
+
+-- TRIGGER AFTER;
+
+CREATE TRIGGER teste_trigger_after
+ON tbl_Editoras
+AFTER INSERT -- Vai entrar no TRIGGER apos inserir dados na tabela e atualizar;
+AS
+PRINT 'Olá mundo!' -- Exibe uma msg dentro da atualização da tbl_Editoras;
+
+INSERT INTO tbl_Editoras VALUES ('Booking')
+
+DROP TRIGGER teste_trigger_after
+
+---------------------------------------------------------------------------------------------------;
+
+-- TRIGGER AFTER;
+
+CREATE TRIGGER trigger_after -- nome do trigger;
+ON tbl_Editoras -- tabela onde vai ser adicionado o trigger apos atualização;
+AFTER INSERT -- DEPOIS de atualizar;
+AS
+INSERT INTO tbl_Autores VALUES (6, 'Jose', 'Silva')
+INSERT INTO tbl_Livros VALUES ('Teste Trigger01', 589977882, '20111209', 41.50, 6, 3)
+
+INSERT INTO tbl_Editoras VALUES ('Editora01') 
+
+---------------------------------------------------------------------------------------------------;
+
+-- TRIGGER InsteadOF;
+
+CREATE TRIGGER teste_trigger_insteadof
+ON tbl_Autores
+INSTEAD OF INSERT
+AS 
+PRINT 'oie...O registro não foi adicionado por causa do INSTEAD OF'
+
+INSERT INTO tbl_Autores VALUES (7, 'Sandra', 'Morgan')
 */
+
+ALTER TABLE tbl_Autores
+DISABLE TRIGGER teste_trigger_insteadof 
+
+---------------------------------------------------------------------------------------------------;
 
 -- Criando uma TRIGGER que atualiza a tabela tbl_Clientes e faz Bkp na tbl_Clientes_bkp
 BEGIN TRAN;
@@ -22,3 +96,66 @@ UPDATE tbl_Clientes SET nmCliente = 'Marcio Oshie' WHERE cdCliente = 1
 
 ROLLBACK TRAN;
 -- COMMIT TRAN;
+
+---------------------------------------------------------------------------------------------------;
+
+/*
+  49 - Triggers - Habilitar, Desabilitar e verificar Status - Parte 03;
+   ENABLE TABLE nome_tabela
+   ENABLE|DISABLE TRIGGER nome_trigger
+/*
+
+ALTER TABLE tbl_Editoras
+ENABLE TRIGGER trigger_after
+
+-- VERIFICAR A EXISTENCIA DE TRIGGERS;
+-- Em uma tabela específica;
+-- EXEC sp_helptrigger @tabname = nome_tabela;
+
+EXECUTE sp_helptrigger @tabname = tbl_Editoras
+
+-- No banco de dados TODO;
+/*
+USE nome_banco_dados
+SELECT * FROM sys.triggers
+WHERE is_disabled = 0
+*/
+
+USE db_Biblioteca
+SELECT * FROM sys.triggers
+WHERE is_disabled = 0 OR is_disabled = 1
+
+---------------------------------------------------------------------------------------------------;
+
+/*
+  50 - Triggers - Determinar colunas alteradas e função update() - Parte 04;
+  Função UPDATE() retorna TRUE se uma coluna for afetada por uma DML;
+
+*/
+
+CREATE TRIGGER trigger_after_autores
+ON tbl_Autores
+AFTER INSERT, UPDATE
+AS
+IF UPDATE(Nome_Autor)
+	BEGIN
+		PRINT('O nome foi alterado!')
+	END
+ELSE
+	BEGIN
+		PRINT('Não foi possivel alterar o nome!')
+	END
+
+-- Aparece a msg ('O nome foi alterado!')
+UPDATE tbl_Autores SET Nome_Autor = 'Rodrigo'
+WHERE ID_Autor = 6
+-- Condição ( UPDATE Nome_Autor )
+
+--------------------------------------------------------------------------------------;
+
+-- Aparece a msg ('Não foi possivel alterar o nome!')
+UPDATE tbl_Autores SET Sobrenome_Autor = 'Cardoso'
+WHERE ID_Autor = 6 
+-- Condição ( UPDATE Sobrenome_Autor ) - fora da condição!
+
+
