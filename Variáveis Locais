@@ -1,0 +1,20 @@
+/*
+
+
+*/
+
+
+Sintaxe:
+DECLARE @nome_Variavel;
+
+DECLARE @MaiorPreco DECIMAL(6,2);
+SET @MaiorPreco = (SELECT MAX(vlProduto) FROM tbl_Produtos)
+SELECT @MaiorPreco
+
+SELECT * FROM tbl_Produtos ORDER BY vlProduto desc
+
+
+-- declarando uma variavel;
+DECLARE @nome_Variavel VARCHAR(10);
+SET @nome_Variavel = 'Marcio'
+PRINT @nome_Variavel
