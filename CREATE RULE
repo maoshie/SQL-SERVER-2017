@@ -1,0 +1,21 @@
+/*
+  CREATE RULE (REGRAS);
+  Especificar o limite dos valores.
+
+*/
+
+Sintaxe:
+CREATE RULE nome_regra AS parametros (variavel)
+
+
+-- Criação de REGRAS;
+CREATE RULE rl_Preco AS @Valor > 15.00 
+
+-- Vincular a regra;
+
+EXECUTE sp_bindrule rl_Preco, 'tbl_Livros.Preco_Livro'
+
+UPDATE tbl_Livros SET Preco_Livro = 115.80 -- Atualiza uma tabela;
+WHERE ID_Livro = 3
+
+
