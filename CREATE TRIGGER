@@ -1,0 +1,24 @@
+/*
+
+
+*/
+
+-- Criando uma TRIGGER que atualiza a tabela tbl_Clientes e faz Bkp na tbl_Clientes_bkp
+BEGIN TRAN;
+CREATE TRIGGER tr_bkp_clientes
+ON tbl_Clientes
+FOR UPDATE
+AS
+	INSERT INTO tbl_Clientes_bkp(cdCliente, nmCliente, dtNascimento, Sexo, cdEndereco, dtInclusão)
+	SELECT cdCliente, nmCliente, dtNascimento, Sexo, cdEndereco, GETDATE() 
+	FROM deleted;
+
+SELECT * FROM tbl_Clientes
+SELECT * FROM tbl_Clientes_bkp
+
+
+UPDATE tbl_Clientes SET nmCliente = 'Marcio Oshie' WHERE cdCliente = 1
+-- Quando atualiza a tbl_Clientes, o TRIGGER dispara e faz um bkp na tabela tbl_Clientes_bkp;
+
+ROLLBACK TRAN;
+-- COMMIT TRAN;
