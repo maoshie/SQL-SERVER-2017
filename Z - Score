@@ -1,0 +1,29 @@
+/*
+
+
+*/
+
+-- Calculando Z Score;
+
+-- Saber a media dos valores;
+SELECT AVG(vlProduto) FROM tbl_Produtos
+
+-- Verificar o Desvio Padrão Amostral;
+SELECT STDEV(vlProduto) AS DesvioPadrao FROM tbl_Produtos
+
+-- Calcular o Z score;
+-- Calcula a MEDIA E DesvioPadrão da tabela toda RESUMIDA;
+
+SELECT AVG(vlProduto) AS Media,
+STDEV(vlProduto) AS DesvioPadrão
+FROM tbl_Produtos
+
+-- Calcula a Media, DesvioPadrão, e Z Score de TODOS os produtos da tabela;
+
+SELECT nmProduto, Calc.Media, Calc.DesvioPadrão, 
+	  (vlProduto - Calc.Media) / Calc.DesvioPadrão AS Z_Score
+FROM tbl_Produtos, (
+SELECT AVG(vlProduto) AS Media,
+STDEV(vlProduto) AS DesvioPadrão
+FROM tbl_Produtos) Calc
+
