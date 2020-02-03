@@ -1,0 +1,41 @@
+/*
+	Autor: Marcio Oshie
+	Data: 29/01/2020
+	Base: AdventureWorks2016CTP3
+	Função: Função de retorno com um UNICO valor;
+	caminho: SELECT AdventureWorks2016CTP3.dbo.UDF_NomeCompletoIdade()
+*/
+
+
+CREATE FUNCTION UDF_NomeCompletoIdade(@BusinessEntityID INT)
+RETURNS VARCHAR(250)
+AS
+BEGIN
+	RETURN (SELECT DISTINCT
+		P.FirstName + ' ' + p.MiddleName + ' ' + p.LastName + ', '  
+		+ CAST(DATEDIFF(YEAR, BirthDate, getdate()) AS VARCHAR(4)) + 'Anos' AS Nome_Employee
+		FROM
+		Person.Person P INNER JOIN HumanResources.Employee HE
+		ON P.BusinessEntityID = HE.BusinessEntityID
+		WHERE P.BusinessEntityID = @BusinessEntityID)
+END
+SELECT AdventureWorks2016CTP3.dbo.UDF_NomeCompletoIdade(5)
+
+-------------------------------------------------------------------------------------------------------
+
+-- Funções de Valor Escalar;
+--SP_helptext UDF_NomeCompletoIdade - Busca informações da função;
+
+-- Selecionar colunas específicas;
+-- Concatenar colunas (Nome, Meio, Sobrenome + Idade);
+-- Utilizando INNER JOIN;
+
+SELECT DISTINCT -- TODOS!
+P.FirstName + ' ' + p.MiddleName + ' ' + p.LastName + ', '  
++ CAST(DATEDIFF(YEAR, BirthDate, getdate()) AS VARCHAR(4)) + 'Anos' AS Nome_Employee
+FROM
+Person.Person P INNER JOIN HumanResources.Employee HE
+ON P.BusinessEntityID = HE.BusinessEntityID
+
+-- Especificando a busca com WHERE;
+WHERE P.BusinessEntityID = 2 
