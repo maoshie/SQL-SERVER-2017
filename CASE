@@ -1,0 +1,28 @@
+/*
+
+
+*/
+
+-- Comando Case;
+
+-- Retornar o resultado com 20% de desconto nos preços ACIMA DE R$6.00;
+
+SELECT cdProduto, nmProduto, vlProduto,
+	CASE
+		WHEN vlProduto > 6.0 THEN vlProduto * 0.8 
+		ELSE vlProduto
+	END AS Preco_Desconto
+FROM tbl_Produtos
+WHERE vlProduto >= 5.0 ORDER BY vlProduto
+
+
+-- adicionar 1.2% + nos valores <= a 5.0
+SELECT cdProduto, nmProduto, vlProduto,
+	CASE
+		WHEN vlProduto <= 5 THEN vlProduto *1.2
+		WHEN vlProduto > 6.0 THEN vlProduto * 0.8 
+		ELSE vlProduto
+	END AS Preco_Desconto
+FROM tbl_Produtos
+--WHERE vlProduto >= 5.0 
+ORDER BY vlProduto
